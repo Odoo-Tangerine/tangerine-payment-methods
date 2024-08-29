@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="report_invoice_document_inherit_sepay" inherit_id="account.report_invoice_document">
+        <div id="right-elements" position="after">
+            <div>
+                <img t-attf-src="https://qr.sepay.vn/img?acc=#{o.company_id.default_bank_account_id.acc_number}&amp;bank=#{o.company_id.default_bank_account_id.bank_id.code}&amp;amount=#{o.amount_residual}&amp;des=#{o.invoice_origin}" style="width:15%; height:auto;" alt="QR Code" />
+                <h6 class="mt-1 ms-3">Scan to pay</h6>
+            </div>
+        </div>
+    </template>
+</odoo>
