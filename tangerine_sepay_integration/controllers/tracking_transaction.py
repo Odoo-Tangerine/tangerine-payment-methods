@@ -22,13 +22,16 @@ class SePayTrackingTransaction(Controller):
             body = request.dispatcher.jsonrequest
             _logger.info(f'WEBHOOK SEPAY START - BODY: {body}')
             if not body.get('code') or not body.get('transferAmount'):
-                return {'success': False, 'message': '[Payment Webhook] - Bad request.'}
+                _logger.error(f'WEBHOOK SEPAY ERROR: The value of field code is required.')
+                return {'success': 400, 'message': 'The value of field code is required.'}
             order_id = request.env['sale.order'].sudo().search([('name', '=', body.get('code'))], limit=1)
             if not order_id:
-                return {'success': False, 'message': '[Payment Webhook] - Order not found.'}
+                _logger.error(f'WEBHOOK SEPAY ERROR: The code not found.')
+                return {'success': 404, 'message': 'The code not found.'}
             invoices = order_id.invoice_ids.filtered(lambda i: i.state == 'posted' and i.amount_residual > 0)
             if not invoices:
-                return {'success': False, 'error': '[Payment Webhook] - No invoice found with posted status and amount due'}
+                _logger.error(f'WEBHOOK SEPAY ERROR: No invoice found with posted status and amount due.')
+                return {'success': 404, 'error': '[Payment Webhook] - No invoice found with posted status and amount due'}
             journal_id = request.env['account.journal'].sudo().search([
                 '&',
                 '&',
@@ -37,13 +40,15 @@ class SePayTrackingTransaction(Controller):
                 ('code', 'ilike', 'BNK%')
             ])
             if not journal_id:
-                return {'success': False, 'error': '[Payment Webhook] - Journal of the bank not found'}
+                _logger.error(f'WEBHOOK SEPAY ERROR: Journal of the bank not found.')
+                return {'success': 404, 'error': '[Payment Webhook] - Journal of the bank not found'}
             payment_method_id = request.env['account.payment.method'].sudo().search([
                 ('payment_type', '=', 'inbound'),
                 ('code', '=', 'electronic')
             ])
             if not payment_method_id:
-                return {'success': False, 'error': '[Payment Webhook] - Payment method electronic not found'}
+                _logger.error(f'WEBHOOK SEPAY ERROR: Payment method electronic not found')
+                return {'success': 404, 'error': '[Payment Webhook] - Payment method electronic not found'}
             amount = body.get('transferAmount', 0)
             for invoice in invoices.sorted(key=lambda i: i.amount_residual, reverse=True):
                 residual_amount = invoice.amount_residual
@@ -79,7 +84,8 @@ class SePayTrackingTransaction(Controller):
                     invoice.message_post(body=message)
                 if amount <= 0:
                     break
-            return {'success': True}
+                _logger.info(f'WEBHOOK SEPAY SUCCESS: Successfully')
+            return {'success': 200, 'message': 'Successfully'}
         except Exception as e:
             _logger.exception(f'WEBHOOK AHAMOVE EXCEPTION: {ustr(e)}')
             return {'status': 500, 'message': ustr(e)}
