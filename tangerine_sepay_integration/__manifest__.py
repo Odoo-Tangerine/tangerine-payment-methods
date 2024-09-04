@@ -2,8 +2,10 @@
     'name': 'SePay Integration',
     'version': '17.0.1.0',
     'category': 'Accounting/Payment Providers',
-    'summary': "",
+    'summary': 'Online Payment',
     'depends': ['payment', 'sale'],
+    'author': 'Long Duong Nhat',
+    'support': 'odoo.tangerine@gmail.com',
     'data': [
         'data/payment_method_data.xml',
         'report/ir_actions_report_templates.xml',
@@ -11,4 +13,8 @@
         'views/report_invoice_document.xml',
     ],
     'license': 'LGPL-3',
+    'installable': True,
+    'auto_install': False,
+    'application': False,
+    'images': ['static/description/thumbnail.png'],
 }
