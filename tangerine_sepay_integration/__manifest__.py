@@ -2,7 +2,7 @@
     'name': 'SePay Integration',
     'version': '17.0.1.0',
     'category': 'Accounting/Payment Providers',
-    'summary': 'Online Payment',
+    'summary': """The SePay Integration Module for Odoo enables instant payment authentication via SePay"s payment webhook. Automatic payment QR generation, transaction history recording, etc.""",
     'depends': ['payment', 'sale'],
     'author': 'Long Duong Nhat',
     'support': 'odoo.tangerine@gmail.com',
