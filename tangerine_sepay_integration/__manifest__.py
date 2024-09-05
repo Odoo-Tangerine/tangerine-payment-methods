@@ -8,7 +8,7 @@
     'support': 'odoo.tangerine@gmail.com',
     'data': [
         'data/payment_method_data.xml',
-        'report/ir_actions_report_templates.xml',
+        # 'report/ir_actions_report_templates.xml',
         'views/res_company_views.xml',
         'views/report_invoice_document.xml',
     ],
