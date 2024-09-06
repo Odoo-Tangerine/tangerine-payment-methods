@@ -7,7 +7,7 @@
                 <p t-if="qr_code_url and o.company_id.country_code == 'VN' and o.qr_code_method == 'sepay_qr'" class="position-relative mb-0">
                     <img t-att-src="qr_code_url" width="128px" height="128px"/>
                 </p>
-                <p t-else="" class="position-relative mb-0">
+                <p t-elif="qr_code_url" class="position-relative mb-0">
                     <img t-att-src="qr_code_url"/>
                     <img src="/account/static/src/img/Odoo_logo_O.svg"
                          id="qrcode_odoo_logo"

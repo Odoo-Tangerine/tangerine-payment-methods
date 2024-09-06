@@ -3,7 +3,7 @@
     'version': '17.0.1.0',
     'category': 'Accounting/Payment Providers',
     'summary': """The SePay Integration Module for Odoo enables instant payment authentication via SePay"s payment webhook. Automatic payment QR generation, transaction history recording, etc.""",
-    'depends': ['payment', 'sale'],
+    'depends': ['payment', 'sale', 'tangerine_bank_sync'],
     'author': 'Long Duong Nhat',
     'support': 'odoo.tangerine@gmail.com',
     'data': [
