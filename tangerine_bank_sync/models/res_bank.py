@@ -12,10 +12,8 @@ class ResBank(models.Model):
     code = fields.Char(string='Code')
     logo_url = fields.Char(string='Logo URL')
 
-    @api.depends('code', 'name')
-    def _compute_display_name(self):
-        for rec in self:
-            rec.display_name = f'[{rec.code}] - {rec.name}'
+    def name_get(self):
+        return [(rec.id, f'[{rec.code}] - {rec.name}') for rec in self]
 
     @staticmethod
     def _payload_bank(record):

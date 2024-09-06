@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo noupdate="1">
-    <record id="payment_method_sepay" model="payment.method">
+    <record id="payment_method_sepay" model="payment.icon">
         <field name="name">SePay</field>
-        <field name="code">sepay</field>
         <field name="sequence">10</field>
         <field name="image" type="base64" file="tangerine_sepay_integration/static/description/icon.png"/>
-        <field name="support_tokenization">False</field>
-        <field name="support_express_checkout">False</field>
-        <field name="supported_country_ids" eval="[Command.set([ref('base.vn')])]"/>
-        <field name="supported_currency_ids" eval="[Command.set([ref('base.VND')])]"/>
-        <field name="provider_ids" eval="[Command.set([ref('payment.payment_provider_transfer')])]"/>
     </record>
 </odoo>
