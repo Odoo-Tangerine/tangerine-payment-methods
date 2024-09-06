@@ -90,7 +90,7 @@
                 </section>
                 <!-- feature -->
             </div>
-            <div id="guidelines" class="tab-pane fade show active" role="tabpanel" tabindex="0" aria-labelledby="guidelines-tab">
+            <div id="guidelines" class="tab-pane fade show" role="tabpanel" tabindex="0" aria-labelledby="guidelines-tab">
                 <section class="mb-5">
                     <div class="container">
                         <div class="alert alert-success" role="alert">
@@ -108,15 +108,28 @@
                     <div class="container">
                         <div class="mb-4">
                             <h4>I. Getting started</h4>
-                            <div class="px-3">
-                                <p>- Register for a SePay account <a href="https://my.sepay.vn/register?gcid=cxyuoflu" target="_blank">here</a></p>
+                                <div class="px-3">
+                                    <div class="alert alert-success" role="alert">
+                                        <h4 class="alert-heading">
+                                            <i class="fa fa-lightbulb-o"></i>
+                                            <span style="font-weight: 700;">Discount Code</span>
+                                        </h4>
+                                        <p>
+                                            Use discount code <span style="font-weight: 700;">EYVR1SYP</span> to get 10% off the service package value for the first registration.
+                                        </p>
+                                    </div>
+                                <p><span style="font-weight: 700;">Step 1: Register for a SePay account</span> <a href="https://my.sepay.vn/register?gcid=cxyuoflu" target="_blank">here</a></p>
                                 <img alt="Register Account" class="rounded shadow-lg bg-body mb-3" src="./images/register_account.png" style="height: auto; width: 100%" />
-                                <p>- Choose a package service</p>
+                                <p><span style="font-weight: 700;">Step 2: Choose a package service</span></p>
                                 <img alt="Choose Package" class="rounded shadow-lg bg-body mb-3" src="./images/choose_package_service.png" style="height: auto; width: 100%" />
-                                <p>- Setup webhook</p>
+                                <p><span style="font-weight: 700;">Apply discount code EYVR1SYP to get 10%</span></p>
+                                <img alt="Apply Discount code" class="rounded shadow-lg bg-body mb-3" src="./images/package_discount.png" style="height: auto; width: 100%" />
+                                <p><span style="font-weight: 700;">Step 3: Bank connection</span></p>
+                                <img alt="Bank connection" class="rounded shadow-lg bg-body mb-3" src="./images/bank_connect.png" style="height: auto; width: 100%" />
+                                <p><span style="font-weight: 700;">Step 4: Setup webhook</span></p>
                                 <p>URL: https://{Your Odoo domain}/webhook/v1/payment/sepay</p>
                                 <img alt="Config Webhook" class="rounded shadow-lg bg-body mb-3" src="./images/config_webhook.png" style="height: auto; width: 100%" />
-                                <p>- Payment Code Structure Configuration</p>
+                                <p><span style="font-weight: 700;">Step 5: Payment Code Structure Configuration</span></p>
                                 <p>Navigate: Company Configuration/General configuration</p>
                                 <img alt="Payment Structure" class="rounded shadow-lg bg-body mb-3" src="./images/payment_structure.png" style="height: auto; width: 100%" />
                             </div>
@@ -128,19 +141,21 @@
                             </div>
                         </div>
                         <div class="mb-4">
-                            <h4>III. Configure default receiving bank account</h4>
+                            <h4>III. QR code configuration</h4>
                             <div class="px-3">
-                                <p>Navigate: Settings/Users & Companies/Companies</p>
-                                <img alt="Settings bank account" class="rounded shadow-lg bg-body mb-3" src="./images/setting_bank_account.png" style="height: auto; width: 100%" />
-                            </div>
-                        </div>
-                        <div class="mb-4">
-                            <h4>IV. Automatic generate QR payment for invoices</h4>
-                            <div class="px-3">
-                                <p>- QR on customer payment portal</p>
-                                <img alt="QR Portal" class="rounded shadow-lg bg-body mb-3" src="./images/qr_customer_portal.png" style="height: auto; width: 100%" />
-                                <p>- QR on invoice report</p>
-                                <img alt="QR Report" class="rounded shadow-lg bg-body mb-3" src="./images/qr_invoice_report.png" style="height: auto; width: 100%" />
+                                <p><span style="font-weight: 700;">Step 1: Add a payment QR-code to your invoices</span></p>
+                                <p>Navigate: Settings/Accounting/Customer Payments/Active QR Code checkbox</p>
+                                <img alt="Active QR code" class="rounded shadow-lg bg-body mb-3" src="./images/active_qr_code.png" style="height: auto; width: 100%" />
+                                <p><span style="font-weight: 700;">Step 2: Choose Recipient Bank & Payment QR-code</span></p>
+                                <p>Navigate to your invoice</p>
+                                <ul>
+                                    <li><span style="font-weight: 700;">Recipient Bank</span>: The bank account receiving money</li>
+                                    <li><span style="font-weight: 700;">Payment QR-code</span>: The QR code type used for invoices</li>
+                                </ul>
+                                <img alt="Invoice" class="rounded shadow-lg bg-body mb-3" src="./images/invoice.png" style="height: auto; width: 100%" />
+                                <p>QR code will appear on customer portal and invoice report</p>
+                                <img alt="customer portal" class="rounded shadow-lg bg-body mb-3" src="./images/qr_customer_portal.png" style="height: auto; width: 100%" />
+                                <img alt="invoice report" class="rounded shadow-lg bg-body mb-3" src="./images/qr_invoice_report.png" style="height: auto; width: 100%" />
                             </div>
                         </div>
                         <div class="mb-4">
