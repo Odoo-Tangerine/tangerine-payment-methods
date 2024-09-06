@@ -2,7 +2,8 @@ import logging
 import psycopg2
 from datetime import datetime
 from markupsafe import Markup
-from odoo import api, registry, SUPERUSER_ID, Command
+from odoo import api, registry, SUPERUSER_ID
+from odoo.sql_db import flush_env
 from odoo.tools import ustr
 from odoo.http import request, Controller, route
 
@@ -39,11 +40,11 @@ class SePayTrackingTransaction(Controller):
             'partner_id': partner_id,
             'state': 'done',
             'currency_id': request.env.ref('base.VND').id,
-            'invoice_ids': [Command.set(invoice.ids)]
+            'invoice_ids': [(6, 0, invoice.ids)]
         }
 
     def _create_payment_transaction(self, invoice, payment_id, amount, sepay_ref, partner_id):
-        request.env.cr.flush()
+        flush_env(request.env)
         db_name = request._cr.dbname
         try:
             db_registry = registry(db_name)

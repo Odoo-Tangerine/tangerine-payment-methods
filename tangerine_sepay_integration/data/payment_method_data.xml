@@ -2,7 +2,6 @@
 <odoo noupdate="1">
     <record id="payment_method_sepay" model="payment.icon">
         <field name="name">SePay</field>
-        <field name="sequence">10</field>
         <field name="image" type="base64" file="tangerine_sepay_integration/static/description/icon.png"/>
     </record>
 </odoo>
