@@ -5,8 +5,8 @@
     'author': 'Long Duong Nhat',
     'category': 'Extra Tools',
     'support': 'odoo.tangerine@gmail.com',
-    'version': '17.0.1.0',
-    'depends': ['base',],
+    'version': '14.0.1.0',
+    'depends': ['base'],
     'data': [
         'data/ir_cron.xml',
         'views/res_bank_views.xml'
