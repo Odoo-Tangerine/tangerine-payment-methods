@@ -34,9 +34,8 @@ class SePayTrackingTransaction(Controller):
             'reference': invoice_ref,
             'payment_id': payment_id,
             'amount': amount,
-            'payment_method_id': request.env.ref('tangerine_sepay_integration.payment_method_sepay').id,
-            'provider_id': request.env.ref('payment.payment_provider_transfer').id,
-            'provider_reference': sepay_ref,
+            'acquirer_id': request.env.ref('payment.payment_acquirer_transfer').id,
+            'acquirer_reference': sepay_ref,
             'partner_id': partner_id,
             'state': 'done',
             'currency_id': request.env.ref('base.VND').id,
@@ -44,7 +43,7 @@ class SePayTrackingTransaction(Controller):
         }
 
     def _create_payment_transaction(self, invoice, payment_id, amount, sepay_ref, partner_id):
-        request.env.flush_all()
+        request.env.cr.flush()
         db_name = request._cr.dbname
         try:
             db_registry = registry(db_name)
@@ -59,7 +58,7 @@ class SePayTrackingTransaction(Controller):
     @route('/webhook/v1/payment/sepay', type='json', auth='public', methods=['POST'])
     def sepay_callback(self):
         try:
-            body = request.dispatcher.jsonrequest
+            body = request.jsonrequest
             _logger.info(f'WEBHOOK SEPAY START - BODY: {body}')
             if not body.get('code') or not body.get('transferAmount'):
                 _logger.error(f'WEBHOOK SEPAY ERROR: The value of field code is required.')

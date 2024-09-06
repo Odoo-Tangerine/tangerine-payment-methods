@@ -3,14 +3,13 @@
     <template id="report_invoice_document_inherit_sepay" inherit_id="account.report_invoice_document">
         <div id="qrcode" position="replace">
             <div id="qrcode" t-if="o.display_qr_code and o.amount_residual > 0">
-                <t t-set="qr_code_url" t-value="o._generate_qr_code(silent_errors=True)"/>
-                <p t-if="qr_code_url and o.company_id.country_code == 'VN' and o.qr_code_method == 'sepay_qr'">
+                <p t-if="qr_code_urls.get(o.id) and o.company_id.country_code == 'VN' and o.qr_code_method == 'sepay_qr'">
                     <strong class="text-center">Scan me with your banking app.</strong><br/><br/>
-                    <img t-att-src="qr_code_url" width="128px" height="128px"/>
+                    <img t-att-src="qr_code_urls[o.id]" width="128px" height="128px"/>
                 </p>
-                <p t-else="">
+                <p t-elif="qr_code_urls.get(o.id)">
                     <strong class="text-center">Scan me with your banking app.</strong><br/><br/>
-                    <img class="border border-dark rounded" t-att-src="qr_code_url"/>
+                    <img class="border border-dark rounded" t-att-src="qr_code_urls[o.id]"/>
                 </p>
             </div>
         </div>
