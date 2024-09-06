@@ -34,7 +34,6 @@ class SePayTrackingTransaction(Controller):
             'reference': invoice_ref,
             'payment_id': payment_id,
             'amount': amount,
-            'payment_method_id': request.env.ref('tangerine_sepay_integration.payment_method_sepay').id,
             'provider_id': request.env.ref('payment.payment_provider_transfer').id,
             'provider_reference': sepay_ref,
             'partner_id': partner_id,

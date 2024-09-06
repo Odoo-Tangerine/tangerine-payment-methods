@@ -4,13 +4,15 @@
         <div id="qrcode" position="replace">
             <div id="qrcode" t-if="o.display_qr_code and o.amount_residual > 0">
                 <t t-set="qr_code_url" t-value="o._generate_qr_code(silent_errors=True)"/>
-                <p t-if="qr_code_url and o.company_id.country_code == 'VN' and o.qr_code_method == 'sepay_qr'">
-                    <strong class="text-center">Scan me with your banking app.</strong><br/><br/>
-                    <img t-att-src="qr_code_url" width="128px" height="128px"/>
-                </p>
-                <p t-else="">
-                    <strong class="text-center">Scan me with your banking app.</strong><br/><br/>
-                    <img class="border border-dark rounded" t-att-src="qr_code_url"/>
+                <p t-if="qr_code_url">
+                    <t t-if="o.company_id.country_code == 'VN' and o.qr_code_method == 'sepay_qr'">
+                        <strong class="text-center">Scan me with your banking app.</strong><br/><br/>
+                        <img t-att-src="qr_code_url" width="128px" height="128px"/>
+                    </t>
+                    <t t-else="">
+                        <strong class="text-center">Scan me with your banking app.</strong><br/><br/>
+                        <img class="border border-dark rounded" t-att-src="qr_code_url"/>
+                    </t>
                 </p>
             </div>
         </div>
