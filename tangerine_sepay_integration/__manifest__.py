@@ -10,9 +10,12 @@
         'data/payment_method_data.xml',
         'views/report_invoice_document.xml',
     ],
-    'license': 'LGPL-3',
+    'images': ['static/description/thumbnail.png'],
+    'license': 'OPL-1',
     'installable': True,
     'auto_install': False,
     'application': False,
-    'images': ['static/description/thumbnail.png'],
+    'currency': 'USD',
+    'price': 29.00
+
 }
