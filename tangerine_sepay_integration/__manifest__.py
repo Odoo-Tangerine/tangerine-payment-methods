@@ -9,6 +9,7 @@
     'data': [
         'data/payment_method_data.xml',
         'views/report_invoice_document.xml',
+        'views/payment_custom_templates.xml',
     ],
     'images': ['static/description/thumbnail.png'],
     'license': 'OPL-1',
@@ -16,5 +17,5 @@
     'auto_install': False,
     'application': False,
     'currency': 'USD',
-    'price': 29.00
+    'price': 59.00
 }

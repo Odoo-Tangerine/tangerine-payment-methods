@@ -6,7 +6,7 @@
                 <t t-set="qr_code_url" t-value="o._generate_qr_code(silent_errors=True)"/>
                 <p t-if="qr_code_url" class="position-relative mb-0">
                     <t t-if="o.company_id.country_code == 'VN' and o.qr_code_method == 'sepay_qr'">
-                        <img t-att-src="qr_code_url" width="128px" height="128px"/>
+                        <img t-att-src="qr_code_url" width="150px" height="150px"/>
                     </t>
                     <t t-else="">
                         <img t-att-src="qr_code_url"/>
