@@ -3,7 +3,7 @@
     <record id="payment_method_sepay" model="payment.method">
         <field name="name">SePay</field>
         <field name="code">sepay</field>
-        <field name="sequence">10</field>
+        <field name="sequence">1</field>
         <field name="image" type="base64" file="tangerine_sepay_integration/static/description/icon.png"/>
         <field name="support_tokenization">False</field>
         <field name="support_express_checkout">False</field>

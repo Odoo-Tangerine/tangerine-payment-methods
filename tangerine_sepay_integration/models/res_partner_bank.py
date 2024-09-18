@@ -5,6 +5,11 @@ from odoo.exceptions import ValidationError
 class ResPartnerBank(models.Model):
     _inherit = 'res.partner.bank'
 
+    def _get_qr_code_generation_params(self, qr_method, amount, currency, debtor_partner, free_communication, structured_communication):
+        if qr_method == 'sepay_qr':
+            return {}
+        return super()._get_qr_code_generation_params(qr_method, amount, currency, debtor_partner, free_communication, structured_communication)
+
     @api.model
     def _get_available_qr_methods(self):
         result = super()._get_available_qr_methods()
