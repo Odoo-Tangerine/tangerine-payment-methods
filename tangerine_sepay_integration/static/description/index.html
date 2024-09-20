@@ -52,7 +52,7 @@
             </li>
         </ul>
         <div class="tab-content mt-3">
-            <div id="features" class="tab-pane fade show " role="tabpanel" aria-labelledby="features-tab" tabindex="0">
+            <div id="features" class="tab-pane fade show active" role="tabpanel" aria-labelledby="features-tab" tabindex="0">
                 <!-- feature -->
                 <section class="mb-5">
                    <div class="container">
@@ -69,7 +69,7 @@
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
                                         <h5 style="color: #FFBD59; margin-bottom: 5px;">Dynamic QR code generation</h5>
-                                        <i>Generate dynamic QR code based on invoice information.</i>
+                                        <i>Generate dynamic QR code based on sale order / invoice information.</i>
                                     </div>
                                 </div>
                             </div>
@@ -79,8 +79,8 @@
                                         <img class="w-100" src="./images/icon_transaction_history.png" alt="Icon booking"/>
                                     </div>
                                     <div class="d-flex flex-column justify-content-center">
-                                        <h5 style="color: #FFBD59; margin-bottom: 5px;">Transaction History Logging</h5>
-                                        <i>Logging transaction history via webhook.</i>
+                                        <h5 style="color: #FFBD59; margin-bottom: 5px;">Automatic Payment Transaction Processing</h5>
+                                        <i>Automatic payment transaction processing via webhook</i>
                                     </div>
                                 </div>
                             </div>
@@ -95,6 +95,17 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="d-flex flex-row rounded border shadow-lg p-3 mb-4">
+                                    <div class="me-3" style="max-width: 10%">
+                                        <img class="w-100" src="./images/icon_qr_code_website.png" alt="Icon booking"/>
+                                    </div>
+                                    <div class="d-flex flex-column justify-content-center">
+                                        <h5 style="color: #FFBD59; margin-bottom: 5px;">Support QR code on website</h5>
+                                        <i>Support QR code generation for your customers on the website.</i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                    </div>
                 </section>
@@ -105,17 +116,17 @@
                     <div class="container">
                         <div class="mb-4">
                             <h4>I. Getting started</h4>
-                                <div class="px-3">
-                                    <div class="alert alert-success" role="alert">
-                                        <h4 class="alert-heading">
-                                            <i class="fa fa-lightbulb-o"></i>
-                                            <span style="font-weight: 700;">Discount Code</span>
-                                        </h4>
-                                        <p>
-                                            Use discount code <span style="font-weight: 700;">EYVR1SYP</span> to get 10% off the service package value for the first registration.
-                                        </p>
-                                    </div>
-                                <p><span style="font-weight: 700;">Step 1: Register for a SePay account</span> <div><a href="https://my.sepay.vn/register?gcid=cxyuoflu" target="_blank">here</a></div></p>
+                            <div class="px-3">
+                                <div class="alert alert-success" role="alert">
+                                    <h4 class="alert-heading">
+                                        <i class="fa fa-lightbulb-o"></i>
+                                        <span style="font-weight: 700;">Discount Code</span>
+                                    </h4>
+                                    <p>
+                                        Use discount code <span style="font-weight: 700;">EYVR1SYP</span> to get 10% off the service package value for the first registration.
+                                    </p>
+                                </div>
+                                <div><p><span style="font-weight: 700;">Step 1: Register for a SePay account</span> <a href="https://my.sepay.vn/register?gcid=cxyuoflu" target="_blank">here</a></p></div>
                                 <img alt="Register Account" class="rounded shadow-lg bg-body mb-3" src="./images/register_account.png" style="height: auto; width: 100%" />
                                 <p><span style="font-weight: 700;">Step 2: Choose a package service</span></p>
                                 <img alt="Choose Package" class="rounded shadow-lg bg-body mb-3" src="./images/choose_package_service.png" style="height: auto; width: 100%" />
@@ -143,7 +154,24 @@
                                 <p><span style="font-weight: 700;">Step 1: Add a payment QR-code to your invoices</span></p>
                                 <p>Navigate: Settings/Accounting/Customer Payments/Active QR Code checkbox</p>
                                 <img alt="Active QR code" class="rounded shadow-lg bg-body mb-3" src="./images/active_qr_code.png" style="height: auto; width: 100%" />
-                                <p><span style="font-weight: 700;">Step 2: Choose Recipient Bank & Payment QR-code</span></p>
+                                <p><span style="font-weight: 700;">Step 2: Add a bank account to contact of the your company</span></p>
+                                <p>Navigate: Contacts/Choose your company/Accounting Tab</p>
+                                <img alt="Add bank account" class="rounded shadow-lg bg-body mb-3" src="./images/add_bank_account.png" style="height: auto; width: 100%" />
+                                <div class="alert alert-warning" role="alert">
+                                    <h4 class="alert-heading">
+                                        <i class="fa fa-exclamation-triangle"></i>
+                                        <span style="font-weight: 700;">Warning</span>
+                                    </h4>
+                                    <p>
+                                        The bank account information of the QR code on the Website or POS will take the last line in the bank account list.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <h4>IV. Use QR code on invoice</h4>
+                            <div class="px-3">
+                                <p><span style="font-weight: 700;">Step 1: Choose Recipient Bank & Payment QR-code</span></p>
                                 <p>Navigate to your invoice</p>
                                 <ul>
                                     <li><span style="font-weight: 700;">Recipient Bank</span>: The bank account receiving money</li>
@@ -156,7 +184,35 @@
                             </div>
                         </div>
                         <div class="mb-4">
-                            <h4>IV. Record payments via webhook</h4>
+                            <h4>V. Use QR code on website</h4>
+                            <div class="px-3">
+                                <p><span style="font-weight: 700;">Step 1: After the customer purchases and checkout</span></p>
+                                <img alt="Invoice" class="rounded shadow-lg bg-body mb-3" src="./images/checkout.png" style="height: auto; width: 100%" />
+                                <p>Choose <span style="font-weight: 700;">SePay Payment Method</span> and press button <span style="font-weight: 700;">[Pay now]</span></p>
+                                <p>Your customer will then see a QR code on the screen.</p>
+                                <img alt="QR Code Website" class="rounded shadow-lg bg-body mb-3" src="./images/qr_website.png" style="height: auto; width: 100%" />
+                                <p>Your customer will scan the QR code and pay for the order. When the payment is successful, the system will record the transaction status and return it to the customer.</p>
+                                <img alt="Payment Success" class="rounded shadow-lg bg-body mb-3" src="./images/payment_success.png" style="height: auto; width: 100%" />
+                                <p>The payment transaction record on the backend</p>
+                                <img alt="Payment Transaction Web" class="rounded shadow-lg bg-body mb-3" src="./images/payment_transaction_web.png" style="height: auto; width: 100%" />
+                            </div>
+                        </div>
+<!--                        <div class="mb-4">-->
+<!--                            <h4>VI. Use QR code on POS</h4>-->
+<!--                            <div class="px-3">-->
+<!--                                <p><span style="font-weight: 700;">Step 1: After the customer purchases and checkout</span></p>-->
+<!--                                <img alt="Invoice" class="rounded shadow-lg bg-body mb-3" src="./images/checkout.png" style="height: auto; width: 100%" />-->
+<!--                                <p>Choose <span style="font-weight: 700;">SePay Payment Method</span> and press button <span style="font-weight: 700;">[Pay now]</span></p>-->
+<!--                                <p>Your customer will then see a QR code on the screen.</p>-->
+<!--                                <img alt="QR Code Website" class="rounded shadow-lg bg-body mb-3" src="./images/qr_website.png" style="height: auto; width: 100%" />-->
+<!--                                <p>Your customer will scan the QR code and pay for the order. When the payment is successful, the system will record the transaction status and return it to the customer.</p>-->
+<!--                                <img alt="Payment Success" class="rounded shadow-lg bg-body mb-3" src="./images/payment_success.png" style="height: auto; width: 100%" />-->
+<!--                                <p>The payment transaction record on the backend</p>-->
+<!--                                <img alt="Payment Transaction Web" class="rounded shadow-lg bg-body mb-3" src="./images/payment_transaction_web.png" style="height: auto; width: 100%" />-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="mb-4">
+                            <h4>VI. Record payments via webhook</h4>
                             <div class="px-3">
                                 <p>- When a customer pays via QR, an api is called from SePay to your Odoo application to record the payment.</p>
                                 <p>- Transaction logging</p>
@@ -169,34 +225,36 @@
                     </div>
                 </section>
             </div>
-            <div id="contact" class="tab-pane fade show active" role="tabpanel" aria-labelledby="contact-tab">
+            <div id="contact" class="tab-pane fade show" role="tabpanel" aria-labelledby="contact-tab">
                 <section class="mb-5">
                     <div class="container">
                         <div class="d-flex flex-column justify-content-center align-items-center">
-                            <p style="color: #777;font-size: 18px;letter-spacing: 1px; margin-bottom: 20px;">
-                                Suppose you have problems installing and using the app. Don't hesitate to get in touch with me via Mail or Zalo using the link below. Best regards!
-                            </p>
-                            <div class="row">
+                            <div class="row align-items-stretch">
                                 <div class="col-md-6">
-                                    <div class="d-flex flex-row rounded border shadow-lg p-3 mb-4">
-                                        <div class="me-3" style="max-width: 10%">
-                                            <img class="w-100" src="./images/zalo_icon.png" alt="Icon real time"/>
+                                    <div class="d-flex flex-row rounded border shadow-lg p-1 mb-4 h-100">
+                                        <div class="d-flex justify-content-center align-items-center" style="width: 50%">
+                                            <img class="w-75 rounded-circle" src="./images/avatar.png" alt="Icon real time"/>
                                         </div>
                                         <div class="d-flex flex-column justify-content-center">
-                                            <h5 style="margin-bottom: 5px;">Zalo</h5>
-                                            <a href="https://zalo.me/84812212228" target="_blank">+84 812 212 228</a>
+                                            <h3>Long Duong Nhat</h3>
+                                            <i><span style="font-weight: 700;">Phone number</span>: <a href="https://zalo.me/84812212228" target="_blank">+84 812 212 228</a></i>
+                                            <i><span style="font-weight: 700;">Email</span>: <a href="mailto:odoo.tangerine@gmail.com" target="_blank">odoo.tangerine@gmail.com</a></i>
+                                            <i><span style="font-weight: 700;">Address</span>: 42a Street no 19, Ward 8, Go Vap District, Ho Chi Minh City, Vietnam</i>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <div class="d-flex flex-row rounded border shadow-lg p-3 mb-4">
-                                        <div class="me-3" style="max-width: 10%">
-                                            <img class="w-100" src="./images/whatapps_qrcode.png" alt="Icon real time"/>
-                                        </div>
-                                        <div class="d-flex flex-column justify-content-center">
-                                            <h5 style="margin-bottom: 5px;">WhatsApp QR Code</h5>
-                                            <a href="https://zalo.me/84812212228" target="_blank">+84 812 212 228</a>
-                                        </div>
+                                <div class="col-md-3">
+                                    <div class="d-flex flex-column justify-content-center align-items-center rounded border shadow-lg p-2 h-100">
+                                        <img style="width: 70%" src="./images/qrcode_zalo.png" alt="Icon Zalo"/>
+                                        <h4><i>Zalo</i></h4>
+                                        <i>Scan QR code to connect with me</i>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="d-flex flex-column justify-content-center align-items-center rounded border shadow-lg p-2 h-100">
+                                        <img style="width: 70%" src="./images/qrcode_whatsapp.png" alt="Icon Whatsapp"/>
+                                        <h4><i>WhatsApp</i></h4>
+                                        <i>Scan QR code to connect with me</i>
                                     </div>
                                 </div>
                             </div>
