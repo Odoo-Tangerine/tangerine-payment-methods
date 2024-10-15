@@ -3,8 +3,8 @@
     <template id="custom_transaction_status_inherit_sepay" inherit_id="payment_custom.custom_transaction_status">
         <xpath expr="//t[@t-set='qr_code']" position="replace"/>
         <xpath expr="//div[@name='o_payment_status_alert']" position="inside">
-            <t t-if="tx.payment_method_code == 'sepay' and tx.state == 'pending'">
-                <t t-set="qr_code" t-value="tx.company_id.sudo().partner_id.bank_ids[-1].build_vietqr_code(tx.amount, tx.reference)"/>
+            <t t-if="tx.payment_method_code == 'sepay' and tx.state == 'pending' and tx.company_id.sudo().partner_id.bank_ids">
+                <t t-set="qr_code" t-value="tx.company_id.sudo().partner_id.bank_ids[0].build_vietqr_code(tx.amount, tx.reference)"/>
             </t>
             <t t-else="">
                 <t t-set="qr_code" t-value="tx.provider_id.sudo().qr_code and tx.company_id.sudo().partner_id.bank_ids[:1].build_qr_code_base64(tx.amount, tx._get_communication(), None, tx.currency_id, tx.partner_id)"/>

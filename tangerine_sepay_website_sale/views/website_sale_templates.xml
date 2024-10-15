@@ -5,7 +5,7 @@
         <xpath expr="//div[@t-if='order.reference']" position="after">
 
             <div t-if="tx_sudo.provider_id.sudo().qr_code">
-                <t t-if="tx_sudo.payment_method_code == 'sepay'">
+                <t t-if="tx_sudo.payment_method_code == 'sepay' and tx_sudo.company_id.partner_id.bank_ids">
                     <t t-set="qr_code" t-value="tx_sudo.company_id.partner_id.bank_ids[-1].build_vietqr_code(tx_sudo.amount, tx_sudo.reference)"/>
                 </t>
                 <t t-else="">
