@@ -1,6 +1,7 @@
 import logging
 import psycopg2
-from datetime import datetime, timedelta
+from markupsafe import Markup
+from datetime import datetime
 from odoo import api, registry, SUPERUSER_ID, Command
 from odoo.tools import ustr
 from odoo.http import request, Controller, route
@@ -136,6 +137,13 @@ class SePayTrackingTransaction(Controller):
             payment_id.action_post()
             line_id = payment_id.line_ids.filtered(lambda l: l.credit)
             invoice.js_assign_outstanding_line(line_id.id)
+            invoice.message_post(body=Markup(f'''
+                Inbound payment from SePay
+                <ul>
+                    <li>Total: {amount:,} đ</li>
+                    <li>Note: {body.get('content', '')}</li>
+                </ul>
+            '''))
             amount -= invoice.amount_residual
             request.env.cr.commit()
 
