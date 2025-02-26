@@ -1,7 +1,6 @@
 import logging
 import psycopg2
-from datetime import datetime
-from markupsafe import Markup
+from datetime import datetime, timedelta
 from odoo import api, registry, SUPERUSER_ID, Command
 from odoo.tools import ustr
 from odoo.http import request, Controller, route
@@ -73,17 +72,22 @@ class SePayTrackingTransaction(Controller):
             pass
 
     @staticmethod
-    def _get_journal(order):
-        journal_id = request.env['account.journal'].sudo().search([
-            '&',
-            '&',
+    def _get_journal(order, body):
+        domain = [
             ('type', '=', 'bank'),
             ('company_id', '=', order.company_id.id),
             ('code', 'ilike', 'BNK%')
-        ])
+        ]
+        if body.get('accountNumber'):
+            bank_account_id = request.env['res.partner.bank'].sudo().search([('acc_number', '=', body.get('accountNumber'))])
+            if bank_account_id:
+                domain.append(('bank_account_id', '=', bank_account_id.id))
+        journal_id = request.env['account.journal'].sudo().search(domain)
         if not journal_id:
             _logger.error(f'WEBHOOK SEPAY ERROR: Journal of the bank not found.')
             return {'success': 404, 'error': '[Payment Webhook] - Journal of the bank not found'}
+        if len(journal_id) > 1:
+            journal_id = journal_id[0]
         return journal_id
 
     @staticmethod
@@ -92,13 +96,15 @@ class SePayTrackingTransaction(Controller):
         if not order_id:
             _logger.error(f'WEBHOOK SEPAY ERROR: The code not found.')
             return {'success': 404, 'message': 'The code not found.'}
+        if order_id.state == 'sent':
+            order_id.action_confirm()
         return order_id
 
     @staticmethod
     def _get_bank_account(account_number):
         return request.env['res.partner.bank'].sudo().search([('acc_number', '=', account_number)])
 
-    def _register_inbound_payment(self, acc_number, amount, date, partner_id, reference, journal_id, currency_id):
+    def _register_inbound_payment(self, acc_number, amount, date, partner_id, memo, journal_id, currency_id, ref):
         bank_account_id = self._get_bank_account(acc_number)
         return request.env['account.payment'].sudo().create({
             'currency_id': currency_id.id,
@@ -106,7 +112,7 @@ class SePayTrackingTransaction(Controller):
             'payment_type': 'inbound',
             'partner_id': partner_id.id,
             'partner_type': 'customer',
-            'ref': reference,
+            'ref': memo,
             'journal_id': journal_id.id,
             'partner_bank_id': bank_account_id.id if bank_account_id else False,
             'date': datetime.strptime(date, '%Y-%m-%d %H:%M:%S')
@@ -122,9 +128,10 @@ class SePayTrackingTransaction(Controller):
                 amount=min(amount, invoice.amount_residual),
                 date=body.get('transactionDate'),
                 partner_id=invoice.partner_id,
-                reference=invoice.name,
+                memo=invoice.name,
                 journal_id=journal_id,
-                currency_id=invoice.currency_id
+                currency_id=invoice.currency_id,
+                ref=body.get('referenceCode')
             )
             payment_id.action_post()
             line_id = payment_id.line_ids.filtered(lambda l: l.credit)
@@ -146,9 +153,10 @@ class SePayTrackingTransaction(Controller):
             amount=body.get('transferAmount'),
             date=body.get('transactionDate'),
             partner_id=order_id.partner_invoice_id,
-            reference=order_id.name,
+            memo=order_id.name,
             journal_id=journal_id,
-            currency_id=order_id.currency_id
+            currency_id=order_id.currency_id,
+            ref=body.get('referenceCode')
         )
         payment_id.action_post()
         request.env.cr.commit()
@@ -170,7 +178,7 @@ class SePayTrackingTransaction(Controller):
                 _logger.error(f'WEBHOOK SEPAY ERROR: The value of field code is required.')
                 return {'success': 400, 'message': 'The value of field code is required.'}
             order_id = self._get_order(body)
-            journal_id = self._get_journal(order_id)
+            journal_id = self._get_journal(order_id, body)
             invoices = order_id.invoice_ids.filtered(lambda i: i.state == 'posted' and i.amount_residual > 0)
             amount = body.get('transferAmount', 0)
             if not invoices:
