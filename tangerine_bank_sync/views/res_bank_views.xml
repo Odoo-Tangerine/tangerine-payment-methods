@@ -18,7 +18,7 @@
                                     <img t-attf-src="#{record.logo_url.value}" style="max-width: 100%; height:auto; margin-top:30%;" alt="Icon"/>
                                 </t>
                                 <t t-else="">
-                                    <img t-attf-src="/tangerine_bank_sync/static/description/images/company_image.png" style="max-width: 100%; height:auto; margin-top:30%;" alt="Icon"/>
+                                    <img t-attf-src="/tangerine_bank_sync/static/description/images/company_image.png" style="max-width: 100%; height:auto;" alt="Icon"/>
                                 </t>
                             </div>
                             <div class="oe_kanban_details d-flex flex-column justify-content-between">
@@ -27,7 +27,13 @@
                                 </div>
                                 <p class="oe_module_name text-nowrap" style="overflow: hidden; text-overflow: ellipsis; color: #d2317b;">
                                     <code>
-                                        <field name="code"/> - <field name="bin"/>
+                                        <t t-if="record.code.value">
+                                            <span>Code: <field name="code"/></span>
+                                        </t>
+                                        <br/>
+                                        <t t-if="record.bic.value">
+                                            <span>Swift Code: <field name="bic"/></span>
+                                        </t>
                                     </code>
                                 </p>
                             </div>
@@ -51,6 +57,7 @@
                 <field name="code"/>
                 <field name="bin"/>
                 <field name="short_name"/>
+                <button name="bank_information_sync" type="object" class="btn btn-primary" string="Sync"/>
             </field>
         </field>
     </record>

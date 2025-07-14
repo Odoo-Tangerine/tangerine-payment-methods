@@ -2,6 +2,7 @@ import requests
 from odoo import fields, models, api
 from odoo.exceptions import UserError
 from odoo.tools import ustr
+from odoo.osv import expression
 
 
 class ResBank(models.Model):
@@ -17,6 +18,22 @@ class ResBank(models.Model):
         for rec in self:
             rec.display_name = f'[{rec.code}] - {rec.name}'
 
+    @api.model
+    def name_search(self, name, args=None, operator='ilike', limit=100):
+        args = args or []
+        domain = []
+        if name:
+            domain = [
+                '|', '|',
+                ('code', 'ilike', name),
+                ('bic', 'ilike', name),
+                ('name', operator, name),
+            ]
+            if operator in expression.NEGATIVE_TERM_OPERATORS:
+                domain = ['&'] + domain
+        banks = self.search(domain + args, limit=limit)
+        return [(bank.id, bank.display_name) for bank in banks]
+
     @staticmethod
     def _payload_bank(record):
         return {
@@ -24,10 +41,10 @@ class ResBank(models.Model):
             'bin': record.get('bin'),
             'short_name': record.get('shortName'),
             'logo_url': record.get('logo'),
-            'code': record.get('code')
+            'code': record.get('code'),
+            'bic': record.get('swift_code'),
         }
 
-    @api.model
     def bank_information_sync(self):
         try:
             res = requests.get(url='https://api.vietqr.io/v2/banks')

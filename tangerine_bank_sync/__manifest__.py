@@ -16,4 +16,5 @@
     'installable': True,
     'auto_install': False,
     'application': False,
+    'post_init_hook': '_bank_post_init_hook',
 }
