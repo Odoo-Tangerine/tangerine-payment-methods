@@ -18,12 +18,6 @@ class ResPartnerBank(models.Model):
 
     def build_vietqr_code(self, amount, order):
         self.ensure_one()
-        if not self.acc_number:
-            raise ValidationError(_('The account number of the bank account receive is required'))
-        elif not self.bank_id.code:
-            raise ValidationError(_('The bank code of the bank account receive is required'))
-        elif not amount:
-            raise ValidationError(_('The money is required'))
-        elif not order:
-            raise ValidationError(_('The reference code is required'))
+        if not self.acc_number or not self.bank_id.code or not amount or amount <= 0 or not order:
+            return False
         return f'https://qr.sepay.vn/img?acc={self.acc_number}&bank={self.bank_id.code}&amount={amount}&des={order}&template=compact'
