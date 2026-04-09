@@ -3,6 +3,7 @@
     'name': 'Bank Information Vietnam',
     'summary': """Providing the latest API to synchronize banking information in Vietnam.""",
     'author': 'Long Duong Nhat',
+    'website': 'https://github.com/long-dn',
     'category': 'Extra Tools',
     'support': 'odoo.tangerine@gmail.com',
     'version': '18.0.1.0',
