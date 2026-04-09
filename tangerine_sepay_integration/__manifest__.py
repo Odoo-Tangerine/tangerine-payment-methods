@@ -5,6 +5,7 @@
     'summary': """The SePay Integration Module for Odoo enables instant payment authentication via SePay"s payment webhook. Automatic payment QR generation, transaction history recording, etc.""",
     'depends': ['payment', 'sale'],
     'author': 'Long Duong Nhat',
+    'website': 'https://github.com/long-dn',
     'support': 'odoo.tangerine@gmail.com',
     'data': [
         'data/payment_method_data.xml',
